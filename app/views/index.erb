@@ -1,5 +1,16 @@
 <div class="container">
 
+<h1>Welcome, Meatbags!</h1>
+
+  <% if current_user %>
+    <% @all_users.each do |user| %>
+
+      <p><%= user.name %></p>
+      <p><%= user.email %></p>
+    <% end %>
+  <% end %>
+
+
   <%# TODO: 
   1. If user is not signed in - display "Welcome".
   2. If user is signed in then  display all users %>

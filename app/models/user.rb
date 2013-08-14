@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   include BCrypt
-  # associations
   # validations
+  
 
   #TODO : Use bcrypt to store hashed passwords and authenticate users
 
