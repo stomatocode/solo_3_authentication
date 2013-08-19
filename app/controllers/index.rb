@@ -3,10 +3,7 @@ enable :sessions
 get '/' do
 
   if current_user
-    session[:user]
-    @users = User.all
-  else
-    redirect '/'
+    puts 'working'
   end
 
   # render home page
@@ -14,6 +11,24 @@ get '/' do
   @all_users = User.all
   erb :index
 end
+
+#----------- USERS -----------
+
+# render sign-up page
+get '/users/new' do
+  erb :sign_up
+end
+
+# send new user 
+post '/users' do
+
+  new_user = User.create(params['user'])
+  session[:user_id] = new_user.id
+
+  redirect '/'
+end
+
+
 
 #----------- SESSIONS -----------
 
@@ -30,7 +45,7 @@ post '/sessions' do
 
   authenticated = User.authenticate(email, password)
 
-
+  
 
   if authenticated 
     session[:user_id] = authenticated.id
@@ -51,15 +66,4 @@ delete '/sessions/:id' do
   # sign-out -- invoked via AJAX
 end
 
-#----------- USERS -----------
 
-# render sign-up page
-get '/users/new' do
-  erb :sign_up
-end
-
-# send new user 
-post '/users' do
-  p params
-  p params[:user]
-end

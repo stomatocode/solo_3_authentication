@@ -6,7 +6,12 @@ class User < ActiveRecord::Base
   #TODO : Use bcrypt to store hashed passwords and authenticate users
 
   def self.authenticate(email, password)
+    p email
+    p password
+
     user = User.find_by_email(email)
+      puts 'authenticated'
+
     if user && user.password == password
       return user
     else
