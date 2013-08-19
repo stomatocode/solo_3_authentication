@@ -3,12 +3,9 @@ enable :sessions
 get '/' do
 
   if current_user
-    puts 'working'
+    @all_users = User.all
   end
 
-  # render home page
-  #TODO: Show all users if user is signed in
-  @all_users = User.all
   erb :index
 end
 
@@ -33,7 +30,6 @@ end
 #----------- SESSIONS -----------
 
 get '/sessions/new' do
-  # render sign-in page 
 
   erb :sign_in
 end
@@ -45,7 +41,7 @@ post '/sessions' do
 
   authenticated = User.authenticate(email, password)
 
-  
+
 
   if authenticated 
     session[:user_id] = authenticated.id
@@ -55,15 +51,10 @@ post '/sessions' do
     redirect '/'
   end
 
-  # authenticate user here
-  # sign-in
-
-  # session[:user_id] = 
 end
 
 delete '/sessions/:id' do
   session.clear
-  # sign-out -- invoked via AJAX
 end
 
 
